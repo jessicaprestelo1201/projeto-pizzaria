@@ -37,7 +37,7 @@ app.get("/", (req, res) => res.render("login", { erro: null }));
 app.post("/login", async (req, res) =>   {
     const { email, senha } = req.body;
     const result = await pool.query("SELECT * FROM usuarios WHERE email =$1 AND senha = $1", [email, senha]);
-    if (result.rows.legnth > 0) {
+    if (result.rows.length > 0) {
         req.session.usuario = result.roes[0];
         req.redirect("/dashboard");
     } else {

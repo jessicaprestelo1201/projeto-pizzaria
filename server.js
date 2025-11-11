@@ -88,3 +88,6 @@ app.post("/pizzas/update/:id", proteger, async (req, res) => {
     await pool.query("UPDATE pizzas SET nome=$1, preco=$2, estoque=$3 WHERE id=$4", [nome, preco, estoque, id]);
     res.redirect("/dashboard");
 });
+
+//Servidor 
+app.listen(3000, () => console.log("Servidor rodando em http://localhost:3000"));

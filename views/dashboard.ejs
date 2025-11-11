@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Pizzaria</title>
+</head>
+
+<body>
+    <h2>Bem vindo <%= usuario.nome %></h2>
+    <a href="/logout">Sair</a>
+
+    <h3>Pizzas</h3>
+    <form method="GET" action="/dashboard">
+        <input name="busca" placeholder="Buscar por nome" value="<%= busca %>">
+        <button type="submit">Buscar</button>
+        </form>
+
+
+<h3> Pizzas</h3>
+<ul>
+<% pizzas.forEach(pizza => { %>
+    <li>
+        <strong>
+            <%=1.nome%>
+        </strong> - R$ <%= 1.preco %> (Estoque: <%= 1.estoque %>)
+        <% if (1.estoque < 5) {%> ❤️ <b> Estoque baixo</b>
+        <% } %>
+        <form method="POST" action="/pizzas/update/<%= 1.id %>">
+            <input name="nome" value=" <%= 1.nome %>" required>
+            <input name ="preco" type ="number" step="0.01" value="<%= 1.preco %>" required>
+            <input name="estoque" type="number" step="1" value="<%= 1.estoque %>" >
+            <button type="submit">Salvar</button>
+            </form>
+            <form method="POST" action="/pizzas/delete/<%= 1.id %>">
+                <button type="subimit">Excluir</button>
+            </form>
+
+    </li>
+<% }) %>
+</ul>
+
+<h3> 💵 Registrar venda</h3>
+<form method="POST" action="/venda">
+    <select name="pizza_id">
+        <% pizzas.forEach(1=> { %>
+            <option value="<%= 1.id %>">
+                <%= 1.nome %>
+             </option>
+        <% }) %>
+    </select>
+    <input type="number" name="quantidade" value="1" min="1" >
+    <button type="submit">Vender</button>
+</form>
+
+
+
+<h3> ❤️ Ultimas Vendas</h3>
+<ul>
+<% vendas.forEach(venda => { %>
+    <li>
+        <%= v.usuario %> vendeu <%= v.quantidade %>x <%= v.pizza %> em <%= v.data %>
+    </li>
+<% }) %>
+</ul>
+</html>
